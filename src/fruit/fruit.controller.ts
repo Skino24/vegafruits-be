@@ -8,20 +8,24 @@ import {
   Post,
   Put,
   Res,
+  UploadedFile,
+  UseInterceptors,
 } from "@nestjs/common";
 import { CreateFruitDto } from "src/dto/create-fruit.dto";
 import { UpdateFruitDto } from "src/dto/update-fruit.dto";
 import { FruitService } from "src/fruit/fruit.service";
 import { Public } from "../auth/decorators/publicDecorator";
+import { FileInterceptor } from "@nestjs/platform-express";
 
 @Controller("fruit")
 export class FruitController {
   constructor(private readonly fruitService: FruitService) { }
 
   @Post()
-  async createFruit(@Res() response, @Body() createFruitDto: CreateFruitDto) {
+  @UseInterceptors(FileInterceptor('image'))
+  async createFruit(@Res() response, @UploadedFile() image: Express.Multer.File, @Body() createFruitDto: CreateFruitDto) {
     try {
-      const imageUrl = await this.fruitService.uploadImageToS3(createFruitDto.image, createFruitDto.name);
+      const imageUrl = await this.fruitService.uploadImageToS3(image, createFruitDto.name);
       createFruitDto.image = imageUrl;
       const newFruit = await this.fruitService.createFruit(createFruitDto);
       return response.status(HttpStatus.CREATED).json({

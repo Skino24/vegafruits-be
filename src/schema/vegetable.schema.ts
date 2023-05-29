@@ -2,8 +2,8 @@ import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { SchemaTypes } from "mongoose";
 
 @Schema()
-export class Fruit {
-  @Prop({ type: SchemaTypes.ObjectId, ref: "Fruit" })
+export class Vegetable {
+  @Prop({ type: SchemaTypes.ObjectId, ref: "Vegetable" })
   productId: string;
 
   @Prop({ required: true, unique: true })
@@ -19,4 +19,4 @@ export class Fruit {
   image: string;
 }
 
-export const FruitSchema = SchemaFactory.createForClass(Fruit);
+export const VegetableSchema = SchemaFactory.createForClass(Vegetable);

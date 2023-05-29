@@ -10,7 +10,7 @@ import { S3Service } from "../lib/s3.service";
 export class FruitService {
   constructor(@InjectModel("Fruit") private fruitModel: Model<Fruit>, private s3Service: S3Service) {}
 
-  async uploadImageToS3(imageBase64: string, name: string): Promise<string> {
+  async uploadImageToS3(imageBase64: Express.Multer.File, name: string): Promise<string> {
     return this.s3Service.uploadImageToS3(imageBase64, process.env.AWS_BUCKET_NAME, name)
   }
 

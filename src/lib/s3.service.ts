@@ -10,14 +10,11 @@ export class S3Service {
     region: process.env.AWS_REGION,
   });
 
-  async uploadImageToS3(imageBase64: string, bucketName: string, fileName: string) {
-    const buf = Buffer.from(imageBase64.replace(/^data:image\/\w+;base64,/, ""),'base64')
-
+  async uploadImageToS3(image: Express.Multer.File, bucketName: string, fileName: string) {
     const params: S3.PutObjectRequest = {
       Bucket: bucketName,
       Key: fileName,
-      Body: buf,
-      ContentEncoding: 'base64',
+      Body: image.buffer,
       ContentType: 'image/jpeg'
     };
 
