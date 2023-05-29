@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { SchemaTypes } from "mongoose";
+import { priceType } from "../types";
 
 @Schema()
 export class Fruit {
@@ -13,7 +14,7 @@ export class Fruit {
   price: number;
 
   @Prop({ required: true })
-  priceBy: string;
+  priceBy: priceType;
 
   @Prop({ required: true })
   image: string;

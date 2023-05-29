@@ -1,0 +1,1 @@
+export type priceType = "kg" | "link" | "number";

@@ -1,5 +1,6 @@
 import { Transform } from "class-transformer";
 import { IsNotEmpty, IsNumber, IsOptional, IsString, Max, MaxLength, Min, isString } from "class-validator";
+import { priceType } from "../types";
 
 export class CreateProductDto {
   @IsString()
@@ -18,7 +19,7 @@ export class CreateProductDto {
 
   @IsNotEmpty()
   @IsString()
-  readonly priceBy: string;
+  readonly priceBy: priceType;
 
   @IsString()
   @IsOptional()  
