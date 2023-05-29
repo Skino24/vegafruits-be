@@ -9,7 +9,7 @@ import { VegetableModule } from './vegetable/vegetable.module';
 
 @Module({
   imports: [
-    MongooseModule.forRoot("mongodb+srv://fvagvtv:yQXi0VZqK8XT2iwr@vfcluster1.trzv03q.mongodb.net/", {
+    MongooseModule.forRoot(process.env.DB_URL, {
       dbName: "dev",
     }),
     UsersModule,
